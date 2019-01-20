@@ -1,5 +1,5 @@
 # XCLocale.py
-XCLocale.py is tool to check syntax error for Localization string in iOS Project which is not discovered by Xcode and also tells if any localization string is missed in any localization String file.
+XCLocale.py is tool to check syntax error for Localization string in iOS Project which is not discovered by Xcode and also tells if any localization string is missed in any of localization String file.
 
 ## Getting Started
 Copy this file in you local directory and give execute permission to this.
