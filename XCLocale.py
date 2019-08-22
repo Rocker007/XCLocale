@@ -521,9 +521,9 @@ class LTool (object):
 
     def printFileHeader(self, filePath):
         print('\n')
-        print "============================================================================"
-        print "File: "+ filePath
-        print "============================================================================"
+        print("============================================================================")
+        print("File: "+ filePath)
+        print("============================================================================")
 
 
     def getAlllocalizedkeys(self,src):
@@ -565,7 +565,7 @@ class LTool (object):
 
 
     def getToolVersion(self):
-        print 'XCLocale Version: '+ ver
+        print('XCLocale Version: '+ ver)
     
 
     def showAllMissingLocalization(self, src):
@@ -600,7 +600,7 @@ class LTool (object):
             fo.write("\n")
             for key,langObj in self.missinglocatization.items():
                 sn = sn + 1
-                fo.write(`sn`+","+key)
+                fo.write(str(sn) + "," + key)
                 for key in allSupportedLangkeys:
                    
                     if key in langObj.keys():
@@ -610,9 +610,9 @@ class LTool (object):
                 fo.write("\n ")
             
             fo.close()
-            print "[INFO: ] Missing localization report is generated at "+'"'+ os.getcwd()+'/'+filename+'"'
+            print("[INFO: ] Missing localization report is generated at "+'"'+ os.getcwd()+'/'+filename+'"')
         else:
-            print "[INFO: ] There is no missing key in all supported localization string files."
+            print("[INFO: ] There is no missing key in all supported localization string files.")
 
     
     def validateLocalizedFile(self,src):
@@ -633,11 +633,11 @@ class LTool (object):
                             if canPrintFileName:
                                 self.printFileHeader(filePath)
                                 canPrintFileName = False
-                            foundError = True    
-                            print "[ERROR: ] Line:" + str(lineNo) + " " + line.rstrip('\n')
+                            foundError = True
+                            print("[ERROR: ] Line :" + str(lineNo) + " " + filterLine)
             f.close()
         if not foundError :  
-            print "[INFO: ] There is no error in localization string files."                     
+            print("[INFO: ] There is no error in localization string files.")
 
 
     def  checheckDuplicatekeysValues(self,src) :
@@ -653,21 +653,21 @@ class LTool (object):
                 if canPrintFileName:
                     self.printFileHeader(filePath)
                     canPrintFileName = False
-                print "[WARNING: ]  Duplicate localization keys"
-                print "------------------------------------------"
+                print("[WARNING: ]  Duplicate localization keys")
+                print("------------------------------------------")
                 c = 0
                 for key in duplicateKeys :
                     c = c + 1
-                    print str(c) +". "+key
+                    print(str(c) +". "+key)
                 print('\n')
-                print "[WARNING: ]  Duplicate translations"
-                print "---------------------------------------"
+                print("[WARNING: ]  Duplicate translations")
+                print("---------------------------------------")
                 c = 0
                 for value in duplicateValues :
                     c = c + 1
-                    print str(c) +". "+value
+                    print(str(c) +". "+value)
             else :
-                print "[INFO: ] There is no duplicate key or value in localization string files."
+                print("[INFO: ] There is no duplicate key or value in localization string files.")
 
 
 def filePathError (options,parser):
