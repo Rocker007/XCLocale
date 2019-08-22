@@ -615,7 +615,7 @@ class LTool (object):
             print("[INFO: ] There is no missing key in all supported localization string files.")
 
     
-    def validateLocalizedFile(self,src):
+    def validateLocalizedFile(self, src, checkBOM):
         self.getAllLocalizationFilePathsMapping(src)
         validPattern = re.compile('^\s*\"(.*?)\"\s*=\s*\"(.*?)\"\s*\;',re.DOTALL)
         foundError = False
@@ -626,10 +626,21 @@ class LTool (object):
                 canPrintFileName = True
                 for line in lines:
                     filterLine = line.lstrip().rstrip()
+                    
+                    # Check BOM
+                    if checkBOM and lineNo == 0:
+                        arr = bytes(filterLine, 'utf-8')
+                        if arr[:3] == b'\xef\xbb\xbf':
+                            filterLine = arr[3:].decode('utf-8')
+                        else:
+                            foundError = True
+                            print("[ERROR: ] BOM is missing!")
+                            break
+                    
                     lineNo = lineNo + 1
                     if not self.isIgnoredCaseLine(filterLine):
                         patternMatched = re.search(validPattern,filterLine)
-                        if not patternMatched :
+                        if not patternMatched:
                             if canPrintFileName:
                                 self.printFileHeader(filePath)
                                 canPrintFileName = False
@@ -704,6 +715,11 @@ def main(argv):
                         dest='checkDuplicate',
                         help='This will check for duplicate localization keys and values')
                     
+    parser.add_option('-b', '--check_bom',
+                        action='store_true',
+                        dest='checkBOM',
+                        help='This will check for BOM UTF8 bytes in the beginning of the file')
+                    
     parser.add_option('-f', '--file',
                         action='store',
                         dest='filename',
@@ -723,7 +739,7 @@ def main(argv):
     
     if options.checkSyntax:
         if not filePathError(options,parser):
-            ltoolObject.validateLocalizedFile(options.filename)
+            ltoolObject.validateLocalizedFile(options.filename, options.checkBOM)
 
     if options.checkDuplicate:
         if not filePathError(options,parser):
