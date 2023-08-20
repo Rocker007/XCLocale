@@ -17,7 +17,7 @@ $ sudo chmod 777  XCLocale.py
   
         -v, --version               Show the XCLocale version
   
-        -m, --missig_localization   Generate a .CVS report for all missing localized string in current directory
+        -m, --missig_localization   Generate a .csv report for all missing localized string in current directory
                         
         -c, --check_syntax          This will check for errors if exist in localized string file
                         
@@ -27,15 +27,15 @@ $ sudo chmod 777  XCLocale.py
   
 ### Example
 ```
-1. ./XCLocale.py -mf <iOS project path>
+1. ./XCLocale.py -mf <XCode project path>
 ```
-This will generate .CVS report where row is localization keys and column is language of missing localization string.
+This will generate `.csv` report where row is localization keys and column is language of missing localization string.
 
 ![report](https://github.com/Rocker007/XCLocale/blob/master/Image%20/Report.png)
 
 
 ```
-2. ./XCLocale.py -cf <iOS project path>
+2. ./XCLocale.py -cf <XCode project path>
 ```
 This will check all localization string file in project for any syntax error.
 
@@ -57,7 +57,7 @@ This will check all localization string file in project for any syntax error.
 
 
 ```
-3. ./XCLocale.py -df <iOS project path>
+3. ./XCLocale.py -df <XCode project path>
 ```
 This will check for all duplicate key and localized string in project file
 
